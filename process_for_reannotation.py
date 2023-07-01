@@ -18,11 +18,12 @@ for sample in data:
     ]
     words_to_add = [w for word in words_to_add for w in word]
 
+    if len(words_to_add) == 0:
+        continue
     original_text = sample["data"]["text"]
-    ext_text = original_text + " |||" + " ".join(words_to_add)
+    ext_text = original_text + " ||| " + " ".join(words_to_add)
     sample["data"]["text"] = ext_text
     sample["meta"]["original_text"] = original_text
 
 with open(data_folder / "extended_data.json", "w") as f:
     json.dump(data, f)
-    
